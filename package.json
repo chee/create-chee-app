@@ -1,26 +1,23 @@
 {
-  "name": "vite-template-solid",
-  "version": "0.0.0",
-  "description": "",
-  "type": "module",
-  "scripts": {
-    "start": "vite",
-    "dev": "vite",
-    "build": "vite build",
-    "serve": "vite preview"
-  },
-  "license": "MIT",
-  "devDependencies": {
-    "typescript": "^5.7.3",
-    "vite": "^6.1.0",
-    "vite-plugin-solid": "^2.11.1",
-    "vite-plugin-wasm": "^3.4.1"
-  },
-  "dependencies": {
-    "@automerge/automerge-repo": "2.0.0-alpha.22",
-    "@automerge/automerge-repo-network-websocket": "2.0.0-alpha.22",
-    "@automerge/automerge-repo-storage-indexeddb": "2.0.0-alpha.22",
-    "automerge-repo-solid-primitives": "2.0.0-beta.14",
-    "solid-js": "^1.9.4"
-  }
+	"name": "@chee/create-app",
+	"type": "module",
+	"version": "1.0.0",
+	"description": "",
+	"main": "dist/index.js",
+	"bin": "dist/index.js",
+	"keywords": [],
+	"author": "",
+	"license": "MIT",
+	"dependencies": {
+		"@clack/prompts": "^0.10.0",
+		"fs-extra": "^11.3.0"
+	},
+	"devDependencies": {
+		"@types/fs-extra": "^11.0.4",
+		"@types/node": "^22.13.1",
+		"typescript": "^5.7.3"
+	},
+	"scripts": {
+		"mk": "tsc"
+	}
 }
