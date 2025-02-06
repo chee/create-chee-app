@@ -1,0 +1,26 @@
+{
+  "name": "vite-template-solid",
+  "version": "0.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.7.3",
+    "vite": "^6.1.0",
+    "vite-plugin-solid": "^2.11.1",
+    "vite-plugin-wasm": "^3.4.1"
+  },
+  "dependencies": {
+    "@automerge/automerge-repo": "2.0.0-alpha.22",
+    "@automerge/automerge-repo-network-websocket": "2.0.0-alpha.22",
+    "@automerge/automerge-repo-storage-indexeddb": "2.0.0-alpha.22",
+    "automerge-repo-solid-primitives": "2.0.0-beta.14",
+    "solid-js": "^1.9.4"
+  }
+}
