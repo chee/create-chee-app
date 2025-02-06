@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import process, {chdir} from "node:process"
 import {confirm, intro, text, spinner, outro, log} from "@clack/prompts"
-import {copy, writeJSON, readJSON} from "fs-extra/esm"
+import {copy, writeJSON, readJSON, pathExists} from "fs-extra/esm"
 import {execFileSync} from "node:child_process"
 
 const dependencies = new Map<string, string>()
@@ -40,6 +40,13 @@ if (typeof name == "symbol") {
 	process.exit(22)
 }
 
+const dir = `./${name}`
+if (await pathExists(dir)) {
+	log.error(`oh no! ${dir} already exists!`)
+	log.message("im feeling anxious about overwriting it, so i'm gonna dip")
+	process.exit(48)
+}
+
 const description = await text({
 	message: "description",
 	placeholder: "a cool app",
@@ -65,8 +72,6 @@ if (useAutomerge) {
 
 addSolid()
 addTypescript()
-
-const dir = `./${name}`
 
 log.info(`ok!! we're gonna make a new project called ${name} in ${dir}`)
 

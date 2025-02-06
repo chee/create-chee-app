@@ -18,6 +18,7 @@
 		"typescript": "^5.7.3"
 	},
 	"scripts": {
-		"mk": "tsc"
+		"mk": "tsc",
+		"prepare": "pnpm mk"
 	}
 }
