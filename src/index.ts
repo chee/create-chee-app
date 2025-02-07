@@ -93,35 +93,23 @@ const templatePackage = await readJSON(getDir("template/package.json"))
 templatePackage.name = name
 templatePackage.description = description
 
-writeJSON(`${dir}/package.json`, templatePackage, {spaces: "\t"})
+await writeJSON(`${dir}/package.json`, templatePackage, {spaces: "\t"})
 chdir(dir)
-
-const installNow = await confirm({
-	message: "pnpm install now?",
-	active: "mmhmm",
-	inactive: "no thx",
-})
-
-if (typeof installNow == "symbol") {
-	process.exit(22)
-}
 
 spin = spinner()
 
-if (installNow) {
-	spin.start()
-	spin.message("installing dev deps")
-	execFileSync("pnpm", [
-		"add",
-		...Array.from(devDependencies.entries()).map(([k, v]) => `${k}@${v}`),
-	])
-	spin.message("installing dev deps")
-	execFileSync("pnpm", [
-		"add",
-		...Array.from(dependencies.entries()).map(([k, v]) => `${k}@${v}`),
-	])
-	spin.stop()
-}
+spin.start()
+spin.message("installing dev deps")
+execFileSync("pnpm", [
+	"add",
+	...Array.from(devDependencies.entries()).map(([k, v]) => `${k}@${v}`),
+])
+spin.message("installing dev deps")
+execFileSync("pnpm", [
+	"add",
+	...Array.from(dependencies.entries()).map(([k, v]) => `${k}@${v}`),
+])
+spin.stop()
 
 log.success("done! yay! 🎉")
 outro(`cd into ${name} and pnpm dev 💞`)
