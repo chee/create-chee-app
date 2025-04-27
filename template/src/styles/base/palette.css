@@ -1,0 +1,43 @@
+:root {
+	--sky: oklch(0.79 0.14 226.17 / 1);
+	--terracotta: oklch(0.74 0.16 22.65 / 1);
+	--red: oklch(0.65 1.2402 19.02);
+	--mynt: oklch(0.88 0.17 167.51 / 1);
+	--sunglow: oklch(0.86 0.16 87.44 / 1);
+	--blue-crayola: oklch(0.52 0.2689 263.27);
+	--mosque: oklch(0.77 0.2143 148.08);
+	--white: oklch(1 0 0 / 1);
+	--black: oklch(0 0 0 / 1);
+
+	--primary: var(--mynt);
+	--primary-dark: oklch(from var(--primary) calc(l * 0.8) c h);
+	--primary-light: oklch(from var(--primary) calc(l * 1.2) c h);
+
+	--link: var(--blue-crayola);
+	--link-dark: oklch(from var(--link) calc(l * 0.8) c h);
+	--link-light: oklch(from var(--link) calc(l * 1.2) c h);
+
+	--info: var(--sky);
+	--info-dark: oklch(from var(--info) calc(l * 0.8) c h);
+	--info-light: oklch(from var(--info) calc(l * 1.2) c h);
+
+	--success: var(--mosque);
+	--success-dark: oklch(from var(--success) calc(l * 0.8) c h);
+	--success-light: oklch(from var(--success) calc(l * 1.2) c h);
+
+	--warning: var(--sunglow);
+	--warning-dark: oklch(from var(--warning) calc(l * 0.8) c h);
+	--warning-light: oklch(from var(--warning) calc(l * 1.2) c h);
+
+	--danger: var(--red);
+	--danger-dark: oklch(from var(--danger) calc(l * 0.8) c h);
+	--danger-light: oklch(from var(--danger) calc(l * 1.2) c h);
+
+	--text: var(--black);
+	--text-dark: oklch(from var(--text) calc(l * 0.8) c h);
+	--text-light: oklch(from var(--text) calc(l * 1.2) c h);
+
+	--page: var(--white);
+	--page-dark: oklch(from var(--page) calc(l * 0.8) c h);
+	--page-light: oklch(from var(--page) calc(l * 1.2) c h);
+}

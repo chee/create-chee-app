@@ -19,6 +19,6 @@
 	},
 	"scripts": {
 		"mk": "tsc",
-		"prepare": "pnpm mk"
+		"prepare": "deno task mk"
 	}
 }

@@ -4,56 +4,51 @@ import {confirm, intro, text, spinner, outro, log} from "@clack/prompts"
 import {copy, writeJSON, readJSON, pathExists} from "fs-extra/esm"
 import {execFileSync} from "node:child_process"
 
-const dependencies = new Map<string, string>()
-const devDependencies = new Map<string, string>()
+const imports = new Map<string, string>()
 
 function addTypescript() {
-	devDependencies.set("typescript", "latest")
+	imports.set("npm:typescript", "latest")
 }
 
 function addSolid() {
-	devDependencies.set("vite", "latest")
-	devDependencies.set("vite-plugin-solid", "latest")
-	devDependencies.set("vite-plugin-wasm", "latest")
-	dependencies.set("solid-js", "latest")
+	imports.set("npm:vite", "latest")
+	imports.set("npm:vite-plugin-solid", "latest")
+	imports.set("npm:vite-plugin-wasm", "latest")
+	imports.set("npm:autoprefixer", "latest")
+	imports.set("npm:@solidjs/router", "latest")
+	imports.set("npm:solid-js", "latest")
+	imports.set("npm:vite-plugin-pwa", "latest")
+	imports.set("npm:workbox-window", "latest")
+	imports.set("npm:@kobalte/core", "latest")
 }
 
 function addAutomerge(version = "next") {
-	dependencies.set("@automerge/automerge-repo", version)
-	dependencies.set("@automerge/automerge-repo-network-websocket", version)
-	dependencies.set("@automerge/automerge-repo-storage-indexeddb", version)
-	dependencies.set("automerge-repo-solid-primitives", version)
+	imports.set("npm:@automerge/automerge-repo", version)
+	imports.set("npm:@automerge/automerge-repo-network-websocket", version)
+	imports.set("npm:@automerge/automerge-repo-storage-indexeddb", version)
+	imports.set("npm:solid-automerge", "latest")
 }
 
 intro("✨ hello, rabbit! 🐇")
-const name = await text({
-	message: "what are we calling it?",
+const folderName = await text({
+	message: "where do you want it?",
 	placeholder: "cool-app",
-	validate(name) {
+	validate(name: string) {
 		if (!name.length) {
-			return "it's gotta have a name"
+			return "folder needs a name"
 		}
 	},
 })
 
-if (typeof name == "symbol") {
+if (typeof folderName == "symbol") {
 	process.exit(22)
 }
 
-const dir = `./${name}`
+const dir = `./${folderName}`
 if (await pathExists(dir)) {
 	log.error(`oh no! ${dir} already exists!`)
 	log.message("im feeling anxious about overwriting it, so i'm gonna dip")
 	process.exit(48)
-}
-
-const description = await text({
-	message: "description",
-	placeholder: "a cool app",
-})
-
-if (typeof description == "symbol") {
-	process.exit(22)
 }
 
 const useAutomerge = await confirm({
@@ -73,7 +68,7 @@ if (useAutomerge) {
 addSolid()
 addTypescript()
 
-log.info(`ok!! we're gonna make a new project called ${name} in ${dir}`)
+log.info(`ok!! we're gonna make a new project in ${dir}`)
 
 function getDir(name: string) {
 	return new URL(`../${name}`, import.meta.url).pathname
@@ -84,32 +79,33 @@ spin.start()
 spin.message("copying files...")
 await copy(getDir("template"), dir)
 if (useAutomerge) {
-	await copy(getDir("parts/automerge-repo"), `${dir}/src/repo`)
+	await copy(getDir("parts/automerge-repo"), dir)
 }
 spin.stop()
 
-const templatePackage = await readJSON(getDir("template/package.json"))
+const denoJSON = await readJSON(getDir("template/deno.jsonc"))
 
-templatePackage.name = name
-templatePackage.description = description
-
-await writeJSON(`${dir}/package.json`, templatePackage, {spaces: "\t"})
+await writeJSON(`${dir}/deno.jsonc`, denoJSON, {spaces: "\t"})
 chdir(dir)
 
 spin = spinner()
 
 spin.start()
 spin.message("installing dev deps")
-execFileSync("pnpm", [
+execFileSync("deno", [
 	"add",
-	...Array.from(devDependencies.entries()).map(([k, v]) => `${k}@${v}`),
+	...Array.from(imports.entries()).map(([k, v]) => `${k}@${v}`),
 ])
 spin.message("installing dev deps")
-execFileSync("pnpm", [
+execFileSync("deno", [
 	"add",
-	...Array.from(dependencies.entries()).map(([k, v]) => `${k}@${v}`),
+	...Array.from(imports.entries()).map(([k, v]) => `${k}@${v}`),
 ])
 spin.stop()
 
 log.success("done! yay! 🎉")
-outro(`cd into ${name} and pnpm dev 💞`)
+outro(`💞
+cd ${folderName}
+deno task dev
+💞`)
+process.exit(0)
