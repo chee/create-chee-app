@@ -1,4 +1,3 @@
-import "./service-worker.css"
 import {useRegisterSW} from "virtual:pwa-register/solid"
 import {createEffect} from "solid-js"
 import {toast} from "./toast.tsx"
