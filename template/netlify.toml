@@ -7,3 +7,4 @@ publish = "output"
 [dev]
 port = 1234
 targetPort = 1232
+command = "deno task dev"

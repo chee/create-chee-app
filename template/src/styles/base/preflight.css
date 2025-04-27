@@ -211,6 +211,7 @@ a:active,
 a:hover {
 	outline-width: 0;
 }
+
 *,
 ::before,
 ::after {

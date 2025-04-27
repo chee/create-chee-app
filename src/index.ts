@@ -106,6 +106,6 @@ spin.stop()
 log.success("done! yay! 🎉")
 outro(`💞
 cd ${folderName}
-deno task dev
+netlify dev
 💞`)
 process.exit(0)
