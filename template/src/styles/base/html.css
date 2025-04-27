@@ -5,7 +5,7 @@ body {
 }
 
 body {
-	font-family: var(--sans-font);
+	font-family: var(--family-sans);
 	display: flex;
 	flex-direction: column;
 }

@@ -1,6 +1,6 @@
 :root {
-	--sans-font: "Jost*", "Jost", sans-serif;
-	--mono-font: "JetBrains Mono", "Courier New", Courier, monospace;
+	--family-sans: "Jost*", "Jost", sans-serif;
+	--family-mono: "JetBrains Mono", "Courier New", Courier, monospace;
 
 	--font-size: 1rem;
 	--font-size-1: calc(var(--font-size) * 3);
