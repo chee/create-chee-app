@@ -8,6 +8,8 @@ publish = "output"
 port = 1234
 targetPort = 1232
 command = "deno task dev"
+autoLaunch = false
+framework = "vite"
 
 [[redirects]]
 from = "/*"
