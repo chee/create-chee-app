@@ -21,6 +21,7 @@ function addSolid() {
 	imports.set("npm:vite-plugin-pwa", "latest")
 	imports.set("npm:workbox-window", "latest")
 	imports.set("npm:@kobalte/core", "latest")
+	imports.set("npm:autoprefixer", "latest")
 	imports.set("jsr:@chee/bemby", "latest")
 }
 
