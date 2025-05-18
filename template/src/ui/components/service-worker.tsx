@@ -1,6 +1,6 @@
 import {useRegisterSW} from "virtual:pwa-register/solid"
 import {createEffect} from "solid-js"
-import {toast} from "./toast.tsx"
+import {toast} from "./toast/toast.tsx"
 import {Button} from "@kobalte/core/button"
 
 export default function ServiceWorker() {

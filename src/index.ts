@@ -13,6 +13,7 @@ function addTypescript() {
 function addSolid() {
 	imports.set("npm:vite", "latest")
 	imports.set("npm:vite-plugin-solid", "latest")
+	imports.set("npm:@deno/vite-plugin", "latest")
 	imports.set("npm:vite-plugin-wasm", "latest")
 	imports.set("npm:autoprefixer", "latest")
 	imports.set("npm:@solidjs/router", "latest")
@@ -20,12 +21,11 @@ function addSolid() {
 	imports.set("npm:vite-plugin-pwa", "latest")
 	imports.set("npm:workbox-window", "latest")
 	imports.set("npm:@kobalte/core", "latest")
+	imports.set("jsr:@chee/bemby", "latest")
 }
 
-function addAutomerge(version = "next") {
-	imports.set("npm:@automerge/automerge-repo", version)
-	imports.set("npm:@automerge/automerge-repo-network-websocket", version)
-	imports.set("npm:@automerge/automerge-repo-storage-indexeddb", version)
+function addAutomerge() {
+	imports.set("npm:@automerge/vanillajs", "latest")
 	imports.set("npm:solid-automerge", "latest")
 }
 

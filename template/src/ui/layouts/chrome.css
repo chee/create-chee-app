@@ -1,0 +1,9 @@
+.chrome {
+	height: 100%;
+	display: flex;
+	width: 100%;
+	transition: background 0.4s;
+	position: relative;
+	background-color: var(--page-fill);
+	color: var(--page-line);
+}

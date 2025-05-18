@@ -2,10 +2,12 @@ import {defineConfig} from "vite"
 import solid from "vite-plugin-solid"
 import wasm from "vite-plugin-wasm"
 import {VitePWA} from "vite-plugin-pwa"
+import deno from "@deno/vite-plugin"
 import autoprefixer from "autoprefixer"
 
 export default defineConfig({
 	plugins: [
+		deno(),
 		solid(),
 		// @ts-expect-error this is actually a real vite plugin
 		wasm(),

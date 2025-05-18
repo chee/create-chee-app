@@ -7,7 +7,9 @@
 		"preview": "vite preview"
 	},
 	"license": "AGPL-3.0+",
-	"imports": {},
+	"imports": {
+		"@/": "./src/"
+	},
 	"compilerOptions": {
 		"lib": [
 			"dom",
