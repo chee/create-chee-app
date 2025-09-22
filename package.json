@@ -1,7 +1,7 @@
 {
 	"name": "@chee/create-app",
 	"type": "module",
-	"version": "2.1.6",
+	"version": "2.1.7",
 	"description": "",
 	"main": "dist/index.js",
 	"bin": "dist/index.js",
