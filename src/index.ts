@@ -1,33 +1,32 @@
 #!/usr/bin/env node
 import process, {chdir} from "node:process"
 import {confirm, intro, text, spinner, outro, log} from "@clack/prompts"
-import {copy, writeJSON, readJSON, pathExists} from "fs-extra/esm"
+import {copy, writeJSON, pathExists} from "fs-extra/esm"
 import {execFileSync} from "node:child_process"
 
-const imports = new Map<string, string>()
+const dependencies = new Map<string, string>()
+const devDependencies = new Map<string, string>()
 
 function addTypescript() {
-	imports.set("npm:typescript", "latest")
+	devDependencies.set("typescript", "latest")
 }
 
 function addSolid() {
-	imports.set("npm:vite", "latest")
-	imports.set("npm:vite-plugin-solid", "latest")
-	imports.set("npm:@deno/vite-plugin", "latest")
-	imports.set("npm:vite-plugin-wasm", "latest")
-	imports.set("npm:autoprefixer", "latest")
-	imports.set("npm:@solidjs/router", "latest")
-	imports.set("npm:solid-js", "latest")
-	imports.set("npm:vite-plugin-pwa", "latest")
-	imports.set("npm:workbox-window", "latest")
-	imports.set("npm:@kobalte/core", "latest")
-	imports.set("npm:autoprefixer", "latest")
-	//imports.set("jsr:@chee/bemby", "latest")
+	devDependencies.set("vite", "latest")
+	devDependencies.set("vite-plugin-solid", "latest")
+	devDependencies.set("vite-plugin-wasm", "latest")
+	devDependencies.set("autoprefixer", "latest")
+	devDependencies.set("vite-plugin-pwa", "latest")
+	devDependencies.set("workbox-window", "latest")
+
+	dependencies.set("@solidjs/router", "latest")
+	dependencies.set("solid-js", "latest")
+	dependencies.set("@kobalte/core", "latest")
 }
 
 function addAutomerge() {
-	imports.set("npm:@automerge/vanillajs", "latest")
-	imports.set("npm:solid-automerge", "latest")
+	dependencies.set("@automerge/vanillajs", "latest")
+	dependencies.set("@automerge/automerge-repo-solid-primitives", "latest")
 }
 
 intro("✨ hello, rabbit! 🐇")
@@ -84,23 +83,26 @@ if (useAutomerge) {
 }
 spin.stop()
 
-const denoJSON = await readJSON(getDir("template/deno.jsonc"))
+import pkg from "../template/package.json" with {type: "json"}
 
-await writeJSON(`${dir}/deno.jsonc`, denoJSON, {spaces: "\t"})
+await writeJSON(`${dir}/package.json`, pkg, {spaces: "\t"})
 chdir(dir)
 
 spin = spinner()
 
 spin.start()
-spin.message("installing dev deps")
-execFileSync("deno", [
+spin.message("installing dependencies")
+
+execFileSync("pnpm", [
 	"add",
-	...Array.from(imports.entries()).map(([k, v]) => `${k}@${v}`),
+	...Array.from(dependencies.entries()).map(([k, v]) => `${k}@${v}`),
 ])
+
 spin.message("installing dev deps")
-execFileSync("deno", [
+execFileSync("pnpm", [
 	"add",
-	...Array.from(imports.entries()).map(([k, v]) => `${k}@${v}`),
+	"--save-dev",
+	...Array.from(devDependencies.entries()).map(([k, v]) => `${k}@${v}`),
 ])
 spin.stop()
 

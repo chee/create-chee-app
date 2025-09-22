@@ -1,0 +1,9 @@
+{
+	"scripts": {
+		"start": "vite",
+		"dev": "vite",
+		"mk": "vite build",
+		"preview": "vite preview"
+	},
+	"license": "AGPL-3.0+"
+}
