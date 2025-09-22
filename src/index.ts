@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import process, {chdir} from "node:process"
 import {confirm, intro, text, spinner, outro, log} from "@clack/prompts"
-import {copy, writeJSON, pathExists} from "fs-extra/esm"
+import {copy, readJSON, writeJSON, pathExists} from "fs-extra/esm"
 import {execFileSync} from "node:child_process"
 
 const dependencies = new Map<string, string>()
@@ -83,7 +83,7 @@ if (useAutomerge) {
 }
 spin.stop()
 
-import pkg from "../template/package.json" with {type: "json"}
+const pkg = await readJSON(getDir("template/package.json"))
 
 await writeJSON(`${dir}/package.json`, pkg, {spaces: "\t"})
 chdir(dir)
