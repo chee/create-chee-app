@@ -1,4 +1,4 @@
-import "../toast.css"
+import "./toast.css"
 import {Toast, toaster} from "@kobalte/core/toast"
 import type {JSX} from "solid-js"
 import {Portal} from "solid-js/web"
